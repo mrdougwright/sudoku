@@ -48,7 +48,6 @@ defmodule Sudoku do
     three_rows
     |> Enum.flat_map(fn row ->
       Enum.slice(row, range)
-      |> Enum.sort()
     end)
     |> valid_list?()
   end

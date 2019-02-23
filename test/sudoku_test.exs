@@ -12,6 +12,12 @@ defmodule SudokuTest do
         assert Sudoku.valid_grid?(grid) == true
       end)
     end
+
+    test "returns false if sudoku grid invalid", %{invalid: bad_grids} do
+      Enum.each(bad_grids, fn grid ->
+        assert Sudoku.valid_grid?(grid) == false
+      end)
+    end
   end
 
   describe "valid_rows?/1" do
