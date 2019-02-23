@@ -15,24 +15,23 @@ defmodule SudokuTest do
   describe "valid_rows?/1" do
     test "returns true for valid rows", %{valid: grid} do
       random_grid = Enum.random(grid)
-
       assert Sudoku.valid_rows?(random_grid) == true
     end
 
     test "returns false for invalid row", %{invalid: bad_grids} do
       random_grid = bad_grids |> List.last()
-
       assert Sudoku.valid_rows?(random_grid) == false
     end
   end
 
   test "valid_columns?", %{valid: grid} do
     random_grid = Enum.random(grid)
-
     assert Sudoku.valid_columns?(random_grid) == true
   end
 
-  test "valid_sub_grid?" do
+  test "valid_sub_grids?", %{valid: grid} do
+    random_grid = Enum.random(grid)
+    assert Sudoku.valid_sub_grids?(random_grid) == true
   end
 
   def grids do
