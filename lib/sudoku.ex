@@ -1,7 +1,7 @@
 defmodule Sudoku do
-  def valid_row?(row) do
-    row
-    |> valid_row_count?()
+  def valid_rows?(rows) do
+    rows
+    |> Enum.all?(&valid_row_count?(&1))
   end
 
   def valid_column?(rows, index) do
@@ -10,6 +10,9 @@ defmodule Sudoku do
       Enum.at(row, index)
     end)
     |> valid_row_count?()
+  end
+
+  def valid_sub_grid?(grid) do
   end
 
   defp valid_row_count?(row) do
@@ -27,8 +30,5 @@ defmodule Sudoku do
       9 -> true
       _ -> false
     end
-  end
-
-  def valid_sub_grid?(rows) do
   end
 end

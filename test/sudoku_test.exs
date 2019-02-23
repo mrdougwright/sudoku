@@ -12,13 +12,18 @@ defmodule SudokuTest do
   # The grid is valid when each row, each column and each 3x3 sub grid
   # contains at most one occurrence of the numbers 1 to 9.
 
-  test "valid_row?/1 returns true for valid row", context do
-    random_row =
-      context.valid
-      |> Enum.random()
-      |> Enum.random()
+  describe "valid_rows?/1" do
+    test "returns true for valid rows", %{valid: grid} do
+      random_grid = Enum.random(grid)
 
-    assert Sudoku.valid_row?(random_row) == true
+      assert Sudoku.valid_rows?(random_grid) == true
+    end
+
+    test "returns false for invalid row", %{invalid: bad_grids} do
+      random_grid = bad_grids |> List.last()
+
+      assert Sudoku.valid_rows?(random_grid) == false
+    end
   end
 
   test "valid_column?", %{valid: valid} do
@@ -26,9 +31,12 @@ defmodule SudokuTest do
       valid
       |> Enum.random()
 
-    random_index = Enum.random(0..9)
+    random_index = Enum.random(0..8)
 
     assert Sudoku.valid_column?(random_grid, random_index) == true
+  end
+
+  test "valid_sub_grid?" do
   end
 
   def grids do
