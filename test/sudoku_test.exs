@@ -18,7 +18,17 @@ defmodule SudokuTest do
       |> Enum.random()
       |> Enum.random()
 
-    assert Sudoku.valid_row?(random_row)
+    assert Sudoku.valid_row?(random_row) == true
+  end
+
+  test "valid_column?", %{valid: valid} do
+    random_grid =
+      valid
+      |> Enum.random()
+
+    random_index = Enum.random(0..9)
+
+    assert Sudoku.valid_column?(random_grid, random_index) == true
   end
 
   def grids do
