@@ -26,14 +26,10 @@ defmodule SudokuTest do
     end
   end
 
-  test "valid_column?", %{valid: valid} do
-    random_grid =
-      valid
-      |> Enum.random()
+  test "valid_columns?", %{valid: grid} do
+    random_grid = Enum.random(grid)
 
-    random_index = Enum.random(0..8)
-
-    assert Sudoku.valid_column?(random_grid, random_index) == true
+    assert Sudoku.valid_columns?(random_grid) == true
   end
 
   test "valid_sub_grid?" do

@@ -4,7 +4,15 @@ defmodule Sudoku do
     |> Enum.all?(&valid_row_count?(&1))
   end
 
-  def valid_column?(rows, index) do
+  def valid_columns?(grid) do
+    0..8
+    |> Enum.with_index()
+    |> Enum.all?(fn {index, _index} ->
+      valid_column?(grid, index)
+    end)
+  end
+
+  defp valid_column?(rows, index) do
     rows
     |> Enum.map(fn row ->
       Enum.at(row, index)
