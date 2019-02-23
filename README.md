@@ -1,21 +1,13 @@
 # Sudoku
 
-**TODO: Add description**
+ Determine if a Sudoku is valid. The Sudoku board could be partially filled,
+ where empty cells are filled with the character '.'.
+ Given a grid, return true if it is valid, return false otherwise.
+ The grid is valid when each row, each column and each 3x3 sub grid
+ contains at most one occurrence of the numbers 1 to 9.
 
-## Installation
+# Just run tests:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `sudoku` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:sudoku, "~> 0.1.0"}
-  ]
-end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/sudoku](https://hexdocs.pm/sudoku).
-
+mix test
+```
