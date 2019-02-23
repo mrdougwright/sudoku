@@ -6,6 +6,14 @@ defmodule SudokuTest do
     grids()
   end
 
+  describe "valid_grid?/1" do
+    test "returns true if sudoku grid valid!", %{valid: grids} do
+      Enum.each(grids, fn grid ->
+        assert Sudoku.valid_grid?(grid) == true
+      end)
+    end
+  end
+
   describe "valid_rows?/1" do
     test "returns true for valid rows", %{valid: grids} do
       Enum.each(grids, fn grid ->

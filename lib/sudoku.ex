@@ -1,4 +1,15 @@
 defmodule Sudoku do
+  @moduledoc """
+  Tests a sudoku grid to validate correct entries, including blanks ('.')
+  """
+
+  def valid_grid?(grid) do
+    with true <- valid_rows?(grid),
+         true <- valid_columns?(grid) do
+      valid_sub_grids?(grid)
+    end
+  end
+
   def valid_rows?(grid) do
     grid
     |> Enum.all?(&valid_list?(&1))
