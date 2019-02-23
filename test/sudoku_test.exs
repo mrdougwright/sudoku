@@ -6,26 +6,57 @@ defmodule SudokuTest do
     grids()
   end
 
+  describe "valid_grid?/1" do
+    test "returns true if sudoku grid valid!", %{valid: grids} do
+      Enum.each(grids, fn grid ->
+        assert Sudoku.valid_grid?(grid) == true
+      end)
+    end
+
+    test "returns false if sudoku grid invalid", %{invalid: bad_grids} do
+      Enum.each(bad_grids, fn grid ->
+        assert Sudoku.valid_grid?(grid) == false
+      end)
+    end
+  end
+
   describe "valid_rows?/1" do
-    test "returns true for valid rows", %{valid: grid} do
-      random_grid = Enum.random(grid)
-      assert Sudoku.valid_rows?(random_grid) == true
+    test "returns true for valid rows", %{valid: grids} do
+      Enum.each(grids, fn grid ->
+        assert Sudoku.valid_rows?(grid) == true
+      end)
     end
 
     test "returns false for invalid row", %{invalid: bad_grids} do
-      random_grid = bad_grids |> List.last()
-      assert Sudoku.valid_rows?(random_grid) == false
+      full_grid = bad_grids |> List.last()
+      assert Sudoku.valid_rows?(full_grid) == false
     end
   end
 
-  test "valid_columns?", %{valid: grid} do
-    random_grid = Enum.random(grid)
-    assert Sudoku.valid_columns?(random_grid) == true
+  describe "valid_columns?/1" do
+    test "returns true for valid columns", %{valid: grids} do
+      Enum.each(grids, fn grid ->
+        assert Sudoku.valid_columns?(grid) == true
+      end)
+    end
+
+    test "returns false for invalid columns", %{invalid: bad_grids} do
+      full_grid = bad_grids |> List.last()
+      assert Sudoku.valid_columns?(full_grid) == false
+    end
   end
 
-  test "valid_sub_grids?", %{valid: grid} do
-    random_grid = Enum.random(grid)
-    assert Sudoku.valid_sub_grids?(random_grid) == true
+  describe "valid_sub_grids?/1" do
+    test "returns true if all 9 quadrants are valid", %{valid: grids} do
+      Enum.each(grids, fn grid ->
+        assert Sudoku.valid_sub_grids?(grid) == true
+      end)
+    end
+
+    test "returns false if any of 9 quadrants invalid", %{invalid: bad_grids} do
+      full_grid = bad_grids |> List.last()
+      assert Sudoku.valid_sub_grids?(full_grid) == false
+    end
   end
 
   def grids do
