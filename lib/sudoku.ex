@@ -11,23 +11,16 @@ defmodule Sudoku do
   end
 
   def valid_rows?(grid) do
-    grid
-    |> Enum.all?(&valid_list?(&1))
+    Enum.all?(grid, &valid_list?(&1))
   end
 
   def valid_columns?(grid) do
-    0..8
-    |> Enum.with_index()
-    |> Enum.all?(fn {index, _index} ->
-      valid_column?(grid, index)
-    end)
+    Enum.all?(0..8, &valid_column?(grid, &1))
   end
 
   def valid_column?(rows, index) do
     rows
-    |> Enum.map(fn row ->
-      Enum.at(row, index)
-    end)
+    |> Enum.map(&Enum.at(&1, index))
     |> valid_list?()
   end
 
@@ -37,18 +30,13 @@ defmodule Sudoku do
     grid
     |> Enum.chunk_every(3)
     |> Enum.all?(fn chunk ->
-      ranges
-      |> Enum.all?(fn range ->
-        valid_sub_grid?(chunk, range)
-      end)
+      Enum.all?(ranges, &valid_sub_grid?(chunk, &1))
     end)
   end
 
   defp valid_sub_grid?(three_rows, range) do
     three_rows
-    |> Enum.flat_map(fn row ->
-      Enum.slice(row, range)
-    end)
+    |> Enum.flat_map(&Enum.slice(&1, range))
     |> valid_list?()
   end
 
